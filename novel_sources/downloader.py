@@ -6,8 +6,9 @@ from .base import BaseNovelParser
 
 
 class Downloader:
-    def __init__(self, parser_obj: Callable[[str], BaseNovelParser], download_dir: str = ""):
+    def __init__(self, parser_obj: Callable[[str], BaseNovelParser], download_dir: str = "", overwrite: bool = False):
         self._download_dir = download_dir
+        self._overwrite = overwrite
         self._parser_obj: Callable[[str], BaseNovelParser] = parser_obj
 
     def start(self, novel_id: str):
@@ -35,7 +36,7 @@ class Downloader:
         amount = len(index)
         num_length = len(str(amount))
         with ThreadPoolExecutor() as executor:
-            novel_tasks = [executor.submit(self.__download, parser, path, i, num_length, data[1]) for i, data in enumerate(index)]
+            novel_tasks = [executor.submit(self.__download, parser, path, i, num_length, data[1], self._overwrite) for i, data in enumerate(index)]
             retry_tasks = []
 
             for i, future in enumerate(novel_tasks):
@@ -43,12 +44,13 @@ class Downloader:
                 failed_result = future.result()
                 if failed_result is not None:
                     failed_index = failed_result[0]
-                    retry_tasks.append(executor.submit(self.__download, parser, path, failed_index, num_length, index[failed_index][1]))
+                    retry_tasks.append(
+                        executor.submit(self.__download, parser, path, failed_index, num_length, index[failed_index][1], self._overwrite)
+                    )
 
             if len(retry_tasks) == 0:
                 print("\nAll tasks success!")
             else:
-                print(f"\nRetry {len(retry_tasks)} failed tasks")
                 amount = len(retry_tasks)
                 error_tasks = []
                 for i, future in enumerate(retry_tasks):
@@ -80,11 +82,15 @@ class Downloader:
         print("Combine finish!")
 
     @staticmethod
-    def __download(parser: BaseNovelParser, path: str, index: int, index_num_length: int, url: str) -> Optional[Tuple[int, BaseException]]:
+    def __download(parser: BaseNovelParser, path: str, index: int, index_num_length: int, url: str, overwrite: bool) -> \
+            Optional[Tuple[int, BaseException]]:
         try:
-            text = parser.parse_content(url)
             text_file_name = (f"%0" + str(index_num_length) + "d.txt") % (index + 1)
-            with open(os.path.join(path, text_file_name), 'w') as text_file:
-                text_file.write(text)
+            text_file_path = os.path.join(path, text_file_name)
+            if overwrite or not os.path.isfile(text_file_path):
+                text = parser.parse_content(url)
+                if len(text) > 0 and not text.isspace():
+                    with open(text_file_path, 'w') as text_file:
+                        text_file.write(text)
         except BaseException as e:
             return index, e

@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABCMeta
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 
 class BaseNovelParser(metaclass=ABCMeta):
@@ -21,5 +21,5 @@ class BaseNovelParser(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def parse_content(self, index_url: str) -> str:
+    def parse_content(self, index_url: str, title: Optional[str] = None) -> str:
         raise NotImplementedError

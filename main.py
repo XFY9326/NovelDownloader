@@ -1,7 +1,7 @@
 from novel_sources import *
 
-novel_id = "4000"
-parser_type = TrxsNovelParser
+novel_id = "25124"
+parser_type = XiaShuYunNovelParser
 
 
 def test():
