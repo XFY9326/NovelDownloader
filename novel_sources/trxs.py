@@ -36,6 +36,4 @@ class TrxsNovelParser(BaseNovelParser):
             document: ElementBase = etree.HTML(r.text)
             content: ElementBase = document.xpath("//div[@class='read_chapterDetail']")[0]
             text_list = [i.strip() for i in content.itertext() if not i.isspace() and len(i) > 0]
-            if len(text_list) > 2:
-                text_list = text_list[2:]
             return '\r\n'.join(text_list)
