@@ -13,6 +13,7 @@
 - http://www.lanlanguoji.com/
 - https://www.trxs.cc/
 - https://www.xiashuyun.com/
+- http://www.buxia.net/
 
 ## 注意事项
 

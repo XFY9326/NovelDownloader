@@ -1,7 +1,7 @@
 from novel_sources import *
 
-novel_id = "25124"
-parser_type = XiaShuYunNovelParser
+novel_id = "258704"
+parser_type = WuShuangNovelParser
 
 
 def test():
@@ -9,7 +9,7 @@ def test():
     index = parser.parse_index()
     print(f"Book: {parser.title}")
     print(f"Total: {len(index)}")
-    print(index)
+    print(f"Index: {index[0][0]} ... {index[len(index) - 1][0]}")
     if len(index) > 0:
         print(parser.parse_content(index[0][1]))
 
