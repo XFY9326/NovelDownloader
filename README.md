@@ -14,6 +14,7 @@
 - https://www.trxs.cc/
 - https://www.xiashuyun.com/
 - http://www.buxia.net/
+- http://www.quanben.io/
 
 ## 注意事项
 

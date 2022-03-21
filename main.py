@@ -1,7 +1,7 @@
 from novel_sources import *
 
-novel_id = "258704"
-parser_type = WuShuangNovelParser
+novel_id = "aoshidanshen"
+parser_type = QuanBenNovelParser
 
 
 def test():
@@ -20,5 +20,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
-    # test()
+    # main()
+    test()
