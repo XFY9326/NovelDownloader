@@ -30,7 +30,7 @@ class TrxsNovelParser(BaseNovelParser):
             index_list.extend([(i.text.strip(), self._SERVER + i.attrib["href"]) for i in index])
         return index_list
 
-    def parse_content(self, index_url: str, title: Optional[str] = None) -> str:
+    def parse_content(self, index_url: str, title: Optional[str] = None) -> Optional[str]:
         with requests.get(index_url) as r:
             r.encoding = "gbk"
             document: ElementBase = etree.HTML(r.text)

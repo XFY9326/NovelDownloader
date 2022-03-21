@@ -89,7 +89,7 @@ class Downloader:
             text_file_path = os.path.join(path, text_file_name)
             if overwrite or not os.path.isfile(text_file_path):
                 text = parser.parse_content(url)
-                if len(text) > 0 and not text.isspace():
+                if text is not None and len(text) > 0 and not text.isspace():
                     with open(text_file_path, 'w') as text_file:
                         text_file.write(text)
         except BaseException as e:

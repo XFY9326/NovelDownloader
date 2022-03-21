@@ -33,7 +33,7 @@ class LanlanNovelParser(BaseNovelParser):
         index: List[ElementBase] = document.xpath("//*[@class='container']/div[2]/div[1]/div[2]/ul/li/a")
         return [(i.text, self._SERVER + i.attrib["href"]) for i in index]
 
-    def parse_content(self, index_url: str, title: Optional[str] = None) -> str:
+    def parse_content(self, index_url: str, title: Optional[str] = None) -> Optional[str]:
         content = ""
         page_url = index_url
         has_next_page = True

@@ -24,7 +24,7 @@ class WuShuangNovelParser(BaseNovelParser):
             index_list.extend([(i.text.strip(), self._SERVER + i.attrib["href"]) for i in index])
         return index_list
 
-    def parse_content(self, index_url: str, title: Optional[str] = None) -> str:
+    def parse_content(self, index_url: str, title: Optional[str] = None) -> Optional[str]:
         content = ""
         page_url = index_url
         has_next_page = True

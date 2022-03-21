@@ -1,7 +1,7 @@
 from novel_sources import *
 
-novel_id = "aoshidanshen"
-parser_type = QuanBenNovelParser
+novel_id = "剑来"
+parser_type = AixdzcNovelParser
 
 
 def test():
@@ -15,10 +15,10 @@ def test():
 
 
 def main():
-    download = Downloader(parser_type, "Downloads")
+    download = Downloader(parser_type, download_dir="Downloads", overwrite=False)
     download.start(novel_id)
 
 
 if __name__ == '__main__':
-    # main()
-    test()
+    main()
+    # test()

@@ -96,7 +96,7 @@ class QuanBenNovelParser(BaseNovelParser):
             result.append(static_chars[num_1] + code + static_chars[num_2])
         return "".join(result)
 
-    def parse_content(self, index_url: str, title: Optional[str] = None) -> str:
+    def parse_content(self, index_url: str, title: Optional[str] = None) -> Optional[str]:
         with self.client.get(index_url, headers={
             "Host": self._HOST_WWW,
             "Connection": "keep-alive",

@@ -21,5 +21,5 @@ class BaseNovelParser(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def parse_content(self, index_url: str, title: Optional[str] = None) -> str:
+    def parse_content(self, index_url: str, title: Optional[str] = None) -> Optional[str]:
         raise NotImplementedError
