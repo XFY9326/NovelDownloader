@@ -1,4 +1,5 @@
 import os
+import sys
 from concurrent.futures import ThreadPoolExecutor
 from typing import List, Tuple, Callable, Optional
 
@@ -16,7 +17,8 @@ class Downloader:
         index = self.__load_index(parser)
         path = self.__prepare_folder(parser)
         self.__launch_tasks(parser, index, path)
-        os.sync()
+        if sys.platform != "win32":
+            os.sync()
         self.__combine_text_file(parser, path)
 
     @staticmethod

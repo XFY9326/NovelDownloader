@@ -22,6 +22,8 @@
   - /n/<novel_id>/list.html
 - https://www.aixdzs.com/
   - /novel/<novel_id>
+- https://www.hzpxw.net
+  - /xinwen/<novel_id>
 
 ## 注意事项
 
